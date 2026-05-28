@@ -72,6 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Text('Welcome Back', style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: 32),
               TextField(
+                key: const Key('pin_input_field'), //AS
                 controller: _pinController,
                 obscureText: true,
                 keyboardType: TextInputType.number,
@@ -86,6 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
               // INTENTIONAL FLAW: No Key or Semantics added here. 
               // Candidate must add them.
               ElevatedButton(
+                key: const Key('login_submit_button'), //AS
                 onPressed: _login,
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 48),
@@ -118,6 +120,7 @@ class DashboardScreen extends StatelessWidget {
         ],
       ),
       body: ListView.builder(
+        key: const Key('accounts_screen_root'), //AS
         padding: const EdgeInsets.all(16),
         itemCount: DataService.accounts.length,
         itemBuilder: (context, index) {
@@ -127,10 +130,14 @@ class DashboardScreen extends StatelessWidget {
             // INTENTIONAL FLAW: List items are hard to select by specific text
             // without a Key or Semantics index.
             child: ListTile(
+              key: Key('account_row_${acct['id']}'),//AS
               contentPadding: const EdgeInsets.all(16),
-              title: Text(acct['name'], style: const TextStyle(fontWeight: FontWeight.bold)),
+              title: Text(acct['name'], 
+              key: Key('account_name_${acct['id']}')//AS
+              style: const TextStyle(fontWeight: FontWeight.bold)),
               subtitle: Text('**** ${acct['acct_num'].toString().substring(4)}'),
               trailing: Text(
+                key: Key('account_balance_${acct['id']}'), //AS
                 '£${acct['balance'].toStringAsFixed(2)}',
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green),
               ),
