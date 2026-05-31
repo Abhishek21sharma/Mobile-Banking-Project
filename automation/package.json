@@ -17,6 +17,7 @@
     "rimraf": "^6.1.3"
   },
   "scripts": {
+    "test:android:with profile": "cross-env PLATFORM=Android PROFILE=pixel7 npx wdio run ./config/wdio.android.conf.ts",
     "postinstall": "npx appium driver install uiautomator2 || true && npx appium driver install xcuitest || true",
     "clean:report": "rimraf allure-results allure-report",
     "allure:generate": "npx allure generate allure-results --clean -o allure-report",
